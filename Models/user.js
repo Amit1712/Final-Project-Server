@@ -7,10 +7,10 @@ const userSchema = new mongoose.Schema({
   country: String,
   email: String,
   newsLetter: Boolean,
-  password: Number,
+  password: String,
   terms: Boolean,
-  zipcode: Number,
-  type: Number,
+  zipcode: String,
+  type: String,
 });
 
 module.exports = mongoose.model("users", userSchema);

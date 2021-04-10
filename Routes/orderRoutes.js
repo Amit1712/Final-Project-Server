@@ -10,6 +10,17 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:userID", (req, res) => {
+  orderModel.find(
+    { userID: { $regex: req.params.userID, $options: "i" } },
+    (err, orders) => {
+      err
+        ? res.status(500).send("Error: " + err)
+        : res.status(200).send(orders);
+    }
+  );
+});
+
 router.post("/", (req, res) => {
   const order = new orderModel({ ...req.body });
   order.save().then(() => {

@@ -33,4 +33,15 @@ router.delete("/cat/:id", (req, res) => {
   });
 });
 
+router.put("/cat/:id", (req, res) => {
+  categoryModel.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    (err, result) => {
+      err
+        ? res.status(500).send("Error: " + err)
+        : res.send("Successfuly Updated Category");
+    }
+  );
+});
 module.exports = router;
