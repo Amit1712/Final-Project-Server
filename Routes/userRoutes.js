@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 //user login
 router.post("/login", async (req, res) => {
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.email || !req.body.password || req.body.password.length < 8) {
     res.status(400).send("MISSING REQUIRED FIELDS!");
     return;
   }
