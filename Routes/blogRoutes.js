@@ -18,4 +18,30 @@ router.get("/post/:id", (req, res) => {
   });
 });
 
+router.post("/", (req, res) => {
+  const post = new articleModel(req.body);
+  post.save().then(() => {
+    res.send("Successfuly Added Post");
+  });
+});
+
+router.put("/:id", (req, res) => {
+  articleModel.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    (err, result) => {
+      err
+        ? res.status(500).send("Error: " + err)
+        : res.send("Successfuly Updated Post");
+    }
+  );
+});
+
+router.delete("/:id", (req, res) => {
+  articleModel.findByIdAndDelete(req.params.id, (err, result) => {
+    err
+      ? res.status(500).send("Error: " + err)
+      : res.send("Successfuly Removed Post");
+  });
+});
 module.exports = router;
